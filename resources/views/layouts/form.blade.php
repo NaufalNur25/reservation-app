@@ -1,3 +1,5 @@
+{{-- {{dd($post -> category)}} --}}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -20,13 +22,13 @@
         @csrf
         <table>
             <tr>
-                <td>Hotel Name</td><td>:</td><td><input type="text" name="hotelName"></td>
+                <td>Hotel Name</td><td>:</td><td><input type="text" name="hotelName" value="{{ @$post -> hotelName}}"></td>
             </tr>
             <tr>
-                <td>Location</td><td>:</td><td><input type="text" name="location"></td>
+                <td>Location</td><td>:</td><td><input type="text" name="location" value="{{ @$post -> location}}"></td>
             </tr>
             <tr>
-                <td>Price per night</td><td>:</td><td><input type="number" name="price"></td>
+                <td>Price per night</td><td>:</td><td><input type="number" name="price" value="{{ @$post -> price}}"></td>
             </tr>
             <tr>
                 <td>image</td><td>:</td><td><input type="file" name="path"></td>
@@ -35,26 +37,38 @@
         <table>
             <tr>
                 <td>
-                <input type="checkbox" id="vehicle1" name="category[]" value="Shower">
+                <input type="checkbox" name="category[]" value="Shower" @if ( @$post -> category[0] )
+                {{ 'checked' }}
+                @endif>
                 <label for="vehicle1"> Shower</label><br>
-                <input type="checkbox" id="vehicle2" name="category[]" value="Pool">
+                <input type="checkbox" name="category[]" value="Pool" @if ( @$post -> category[1] )
+                {{ 'checked' }}
+                @endif>
                 <label for="vehicle2"> Pool</label><br>
-                <input type="checkbox" id="vehicle3" name="category[]" value="Breakfast">
+                <input type="checkbox" name="category[]" value="Breakfast" @if ( @$post -> category[2] )
+                {{ 'checked' }}
+                @endif>
                 <label for="vehicle3"> Breakfast</label><br>
                 </td>
                 <td>
-                <input type="checkbox" id="vehicle1" name="category[]" value="Wifi">
+                <input type="checkbox" name="category[]" value="Wifi" @if ( @$post -> category[3] )
+                {{ 'checked' }}
+                @endif>
                 <label for="vehicle1"> Wifi</label><br>
-                <input type="checkbox" id="vehicle2" name="category[]" value="Bed">
+                <input type="checkbox" name="category[]" value="Bed" @if ( @$post -> category[4] )
+                {{ 'checked' }}
+                @endif>
                 <label for="vehicle2"> Double Bed</label><br>
-                <input type="checkbox" id="vehicle3" name="category[]" value="Refrigerator">
+                <input type="checkbox" name="category[]" value="Refrigerator" @if ( @$post -> category[5] )
+                {{ 'checked' }}
+                @endif>
                 <label for="vehicle3"> Refrigerator</label><br>
                 </td>
             </tr>
         </table>
         <table>
             <tr>
-                <td>Description</td><td>:</td><td><textarea name="desc" class="myText-area"></textarea></td>
+                <td>Description</td><td>:</td><td><textarea name="desc" class="myText-area">{{ @$post -> desc}}</textarea></td>
             </tr>
         </table>
 

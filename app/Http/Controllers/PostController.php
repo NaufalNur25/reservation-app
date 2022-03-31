@@ -14,7 +14,9 @@ class PostController extends Controller
      */
     public function index()
     {
-        return view('home');
+        return view('home', [
+            'posts' => Post::all()
+        ]);
     }
 
     /**
@@ -63,7 +65,7 @@ class PostController extends Controller
             'desc'=>$request['desc']
         ]);
 
-        return redirect('home')->with('success', 'File has been added.');
+        return redirect()->route('home')->with('success', 'File has been added.');
     }
 
     /**
@@ -75,6 +77,9 @@ class PostController extends Controller
     public function show(Post $post)
     {
         //
+        return view('detail', [
+            'post' => $post
+        ]);
     }
 
     /**
@@ -86,6 +91,9 @@ class PostController extends Controller
     public function edit(Post $post)
     {
         //
+        return view('input', [
+            'post' => $post
+        ]);
     }
 
     /**
@@ -109,5 +117,7 @@ class PostController extends Controller
     public function destroy(Post $post)
     {
         //
+        $post -> delete();
+        return redirect()->route('home')->with('success', 'File has been delete.');
     }
 }
