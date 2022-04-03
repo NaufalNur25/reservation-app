@@ -106,6 +106,27 @@ class PostController extends Controller
     public function update(Request $request, Post $post)
     {
         //
+        $request->validate([
+            'hotelName' => 'required',
+            'location' => 'required',
+            'price' => 'required',
+            'category' => 'required',
+            'desc' => 'required'
+        ]);
+
+        $post->hotelName = $request->hotelName;
+        $post->location = $request->location;
+        $post->price = $request->price;
+        $post->category = $request->category;
+        $post->desc = $request->desc;
+        if ($request->hasFile('path')) {
+            $imageName = time().'.'.request()->path->getClientOriginalExtension();
+            request()->path->move(public_path('images'), $imageName);
+            $post->path = $imageName;
+        }
+        $post->save();
+        return redirect()->route('home')->with('success', 'File has been update.');
+
     }
 
     /**

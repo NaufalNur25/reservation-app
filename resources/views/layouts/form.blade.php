@@ -18,7 +18,7 @@
 
 </head>
 <body>
-    <form action="{{ route('post.store') }}" method="POST" enctype="multipart/form-data">
+    <form action="{{ @$post ? route('post.edit', ['post' => $post -> id]) : route('post.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
         <table>
             <tr>
@@ -33,8 +33,22 @@
             <tr>
                 <td>image</td><td>:</td><td><input type="file" name="path"></td>
             </tr>
+            <tr><td>Fasilitas</td><td>:</td>
+                <td>
+                    <select name="category">
+                        <option value="Shower" {{ @$post -> category == 'Shower' ? 'selected' : '' }}>Shower</option>
+                        <option value="Pool" {{ @$post -> category == 'Pool' ? 'selected' : '' }}>Pool</option>
+                        <option value="Breakfast" {{ @$post -> category == 'Breakfast' ? 'selected' : '' }}>Breakfast</option>
+                        <option value="Wifi" {{ @$post -> category == 'Wifi' ? 'selected' : '' }}>Wifi</option>
+                        <option value="Bed" {{ @$post -> category == 'Bed' ? 'selected' : '' }}>Bed</option>
+                        <option value="Refrigerator" {{ @$post -> category == 'Refrigerator' ? 'selected' : '' }}>Refrigerator</option>
+                    </select>
+                </td>
+            </tr>
         </table>
-        <table>
+
+
+        {{-- <table>
             <tr>
                 <td>
                 <input type="checkbox" name="category[]" value="Shower" @if ( @$post -> category[0] )
@@ -65,7 +79,7 @@
                 <label for="vehicle3"> Refrigerator</label><br>
                 </td>
             </tr>
-        </table>
+        </table> --}}
         <table>
             <tr>
                 <td>Description</td><td>:</td><td><textarea name="desc" class="myText-area">{{ @$post -> desc}}</textarea></td>

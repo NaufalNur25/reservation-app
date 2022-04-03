@@ -2,9 +2,7 @@
 <h1>{{ $post -> hotelName }}</h1>
 <small>{{ $post -> location }}</small>
 <p>
-    @foreach($post->category as $value)
-        {{$value}}
-     @endforeach
+   {{ $post->category }}
 </p>
 <p>{{ $post -> desc }}</p>
 
